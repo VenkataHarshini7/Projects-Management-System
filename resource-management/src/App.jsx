@@ -6,6 +6,7 @@ import Layout from './components/Layout';
 // Auth Pages
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import ConfigCheck from './pages/ConfigCheck';
 
 // Admin Pages
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -42,6 +43,7 @@ function AppRoutes() {
   return (
     <Routes>
       {/* Public Routes */}
+      <Route path="/config-check" element={<ConfigCheck />} />
       <Route
         path="/login"
         element={

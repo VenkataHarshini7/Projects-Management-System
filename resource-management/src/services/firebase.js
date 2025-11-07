@@ -3,18 +3,16 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
-// TODO: Get your Web App config from Firebase Console
-// See FIREBASE_SETUP.md for detailed instructions
-// Go to: https://console.firebase.google.com/project/eastman-eb9cf/settings/general
-// Scroll to "Your apps" and copy the firebaseConfig object
-
+// TODO: Replace with your Firebase project configuration
+// Get these values from Firebase Console > Project Settings > General
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",  // Get from Firebase Console
+  apiKey: "AIzaSyDf5DrGv9PuOyIg0uqpcE1Q09-iHAb1hrI",
   authDomain: "eastman-eb9cf.firebaseapp.com",
   projectId: "eastman-eb9cf",
-  storageBucket: "eastman-eb9cf.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",  // Get from Firebase Console
-  appId: "YOUR_APP_ID"  // Get from Firebase Console
+  storageBucket: "eastman-eb9cf.firebasestorage.app",
+  messagingSenderId: "850492769137",
+  appId: "1:850492769137:web:303f6ad420b350d65dacd0",
+  measurementId: "G-KSQLZFVY10"
 };
 
 // Initialize Firebase

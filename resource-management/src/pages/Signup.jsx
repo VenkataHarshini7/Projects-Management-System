@@ -58,12 +58,22 @@ const Signup = () => {
         navigate('/employee/dashboard');
       }
     } catch (error) {
+      console.error('Signup error:', error);
+
+      // Detailed error messages
       if (error.code === 'auth/email-already-in-use') {
         setError('Email already in use');
+      } else if (error.code === 'auth/invalid-email') {
+        setError('Invalid email address');
+      } else if (error.code === 'auth/operation-not-allowed') {
+        setError('Email/Password authentication is not enabled. Please enable it in Firebase Console.');
+      } else if (error.code === 'auth/weak-password') {
+        setError('Password is too weak. Use at least 6 characters.');
+      } else if (error.message) {
+        setError(`Error: ${error.message}`);
       } else {
-        setError('Failed to create account. Please try again.');
+        setError('Failed to create account. Check console for details.');
       }
-      console.error('Signup error:', error);
     } finally {
       setLoading(false);
     }
