@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { getUser, updateUser, addSkill, removeSkill, addCertification } from '../../services/database';
+import { getUser, updateUser, addSkill, removeSkill, addCertification, removeCertification } from '../../services/database';
 import { Plus, X, Save, Award, Briefcase } from 'lucide-react';
 
 const EmployeeProfile = () => {
@@ -95,6 +95,17 @@ const EmployeeProfile = () => {
     } catch (error) {
       console.error('Error adding certification:', error);
       alert('Error adding certification');
+    }
+  };
+
+  const handleRemoveCertification = async (certification) => {
+    try {
+      await removeCertification(currentUser.uid, certification);
+      await loadUserProfile(currentUser.uid);
+      alert('Certification removed successfully!');
+    } catch (error) {
+      console.error('Error removing certification:', error);
+      alert('Error removing certification');
     }
   };
 
@@ -339,6 +350,13 @@ const EmployeeProfile = () => {
                   <Award className="text-green-600" size={18} />
                   <p className="text-sm font-medium text-gray-900">{cert}</p>
                 </div>
+                <button
+                  onClick={() => handleRemoveCertification(cert)}
+                  className="p-2 hover:bg-green-100 rounded-full text-red-600 hover:text-red-700 transition-colors"
+                  title="Remove certification"
+                >
+                  <X size={18} />
+                </button>
               </div>
             ))
           ) : (

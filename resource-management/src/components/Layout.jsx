@@ -32,6 +32,7 @@ const Layout = ({ children }) => {
       return [
         { path: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
         { path: '/admin/users', label: 'Users', icon: Users },
+        { path: '/admin/projects', label: 'Projects', icon: FolderKanban },
         { path: '/admin/reports', label: 'Reports', icon: FileText }
       ];
     } else if (userProfile?.role === 'project_manager') {

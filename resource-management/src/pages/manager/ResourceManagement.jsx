@@ -92,17 +92,38 @@ const ResourceManagement = () => {
   const handleAllocationSubmit = async (e) => {
     e.preventDefault();
 
+    console.log('=== ALLOCATION SUBMIT ===');
+    console.log('Form:', allocationForm);
+    console.log('Project:', selectedProject?.id);
+
     try {
+      if (!allocationForm.employeeId) {
+        alert('Please select an employee');
+        return;
+      }
+
+      if (!allocationForm.allocationPercentage || allocationForm.allocationPercentage <= 0) {
+        alert('Please enter a valid allocation percentage');
+        return;
+      }
+
       const employee = employees.find((emp) => emp.id === allocationForm.employeeId);
+
+      if (!employee) {
+        alert('Employee not found');
+        return;
+      }
 
       const allocationData = {
         employeeId: allocationForm.employeeId,
-        employeeName: employee?.fullName || 'Unknown',
+        employeeName: employee.fullName || 'Unknown',
         allocationPercentage: Number(allocationForm.allocationPercentage),
         role: allocationForm.role,
         startDate: allocationForm.startDate,
         endDate: allocationForm.endDate
       };
+
+      console.log('Allocating:', allocationData);
 
       if (editingAllocation) {
         await updateResourceAllocation(
@@ -117,10 +138,10 @@ const ResourceManagement = () => {
       }
 
       setShowAllocationModal(false);
-      loadData();
+      await loadData();
     } catch (error) {
-      console.error('Error saving allocation:', error);
-      alert('Error saving allocation');
+      console.error('=== ERROR ===', error);
+      alert(`Error: ${error.message}. Check browser console (F12) for details.`);
     }
   };
 

@@ -108,10 +108,11 @@ const AdminDashboard = () => {
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Total Employees</p>
+              <p className="text-sm font-medium text-gray-600">Total Staff</p>
               <p className="text-3xl font-bold text-gray-900 mt-2">
                 {kpis?.totalEmployees || 0}
               </p>
+              <p className="text-xs text-gray-500 mt-1">Employees & Managers</p>
             </div>
             <div className="p-3 bg-blue-100 rounded-lg">
               <Users className="text-blue-600" size={24} />

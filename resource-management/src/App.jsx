@@ -11,10 +11,11 @@ import ConfigCheck from './pages/ConfigCheck';
 // Admin Pages
 import AdminDashboard from './pages/admin/AdminDashboard';
 import UserManagement from './pages/admin/UserManagement';
+import AdminProjectsView from './pages/admin/AdminProjectsView';
 
 // Manager Pages
 import ManagerDashboard from './pages/manager/ManagerDashboard';
-import ProjectsManagement from './pages/manager/ProjectsManagement';
+import ProjectsManagement from './pages/manager/ProjectsManagementEnhanced';
 import ResourceManagement from './pages/manager/ResourceManagement';
 
 // Employee Pages
@@ -74,6 +75,16 @@ function AppRoutes() {
           <ProtectedRoute allowedRoles={['admin']}>
             <Layout>
               <UserManagement />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/projects"
+        element={
+          <ProtectedRoute allowedRoles={['admin']}>
+            <Layout>
+              <AdminProjectsView />
             </Layout>
           </ProtectedRoute>
         }

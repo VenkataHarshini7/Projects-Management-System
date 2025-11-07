@@ -188,7 +188,7 @@ export const allocateResource = async (projectId, allocationData) => {
   try {
     const allocation = {
       ...allocationData,
-      allocatedAt: serverTimestamp()
+      allocatedAt: new Date().toISOString()
     };
 
     await updateDoc(doc(db, 'projects', projectId), {
@@ -277,7 +277,7 @@ export const addProjectExpense = async (projectId, expenseData) => {
     const expense = {
       ...expenseData,
       id: Date.now().toString(),
-      createdAt: serverTimestamp()
+      createdAt: new Date().toISOString()
     };
 
     await updateDoc(doc(db, 'projects', projectId), {
@@ -333,6 +333,19 @@ export const addCertification = async (userId, certification) => {
   }
 };
 
+export const removeCertification = async (userId, certification) => {
+  try {
+    await updateDoc(doc(db, 'users', userId), {
+      certifications: arrayRemove(certification),
+      updatedAt: serverTimestamp()
+    });
+    return { success: true };
+  } catch (error) {
+    console.error('Error removing certification:', error);
+    throw error;
+  }
+};
+
 // ==================== ANALYTICS & REPORTS ====================
 
 export const getOrganizationKPIs = async () => {
@@ -340,7 +353,8 @@ export const getOrganizationKPIs = async () => {
     const users = await getAllUsers();
     const projects = await getAllProjects();
 
-    const employees = users.filter(u => u.role === 'employee');
+    // Count all non-admin users (employees + managers)
+    const employees = users.filter(u => u.role === 'employee' || u.role === 'project_manager');
     const activeProjects = projects.filter(p => p.status === 'active');
 
     let totalAllocation = 0;
