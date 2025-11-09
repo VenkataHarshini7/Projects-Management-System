@@ -7,12 +7,13 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+node_modules/
+dist/
+dist-ssr/
 *.local
 
 # Editor directories and files
+D:\Desktop\Eastman-Hackethon\resource-management\src\services\firebase.js
 .env
 .vscode/*
 !.vscode/extensions.json
